@@ -156,7 +156,7 @@ namespace Monad
 		/// Get the Right value
 		/// Returns Nothing if the object is in the Left state
 		/// </summary>
-		public static Option<R> RightOption<R, L>(this Either<R, L> m)
+		public static Option<R> RightOption<L, R>(this Either<L, R> m)
 		{
 			return Option.Return(m.Match(
 				Right: r => OptionResult.Just(r),
@@ -176,7 +176,7 @@ namespace Monad
             return res.Left;
         }
 
-		public static Option<L> LeftOption<R, L>(this Either<R, L> m)
+		public static Option<L> LeftOption<R, L>(this Either<L, R> m)
 		{
 			return Option.Return(m.Match(
 				Right: _ => OptionResult.Nothing<L>(),
