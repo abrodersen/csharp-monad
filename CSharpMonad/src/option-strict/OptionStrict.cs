@@ -273,6 +273,22 @@ namespace Monad
         {
             return new JustStrict<T>(default(T));
         }
+
+		/// <summary>
+		/// Monadic return. This method is helpful for type coercion
+		/// </summary>
+		public static OptionStrict<T> Just<T>(T value)
+		{
+			return new JustStrict<T>(value);
+		}
+
+		/// <summary>
+		/// Monadic zero. This method is useful for type coercion
+		/// </summary>
+		public static OptionStrict<T> Nothing<T>()
+		{
+			return new NothingStrict<T>();
+		}
     }
 
     /// <summary>
