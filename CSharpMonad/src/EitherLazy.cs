@@ -152,6 +152,17 @@ namespace Monad
             return res.Right;
         }
 
+		/// <summary>
+		/// Get the Right value
+		/// Returns Nothing if the object is in the Left state
+		/// </summary>
+		public static Option<R> RightOption<L, R>(this Either<L, R> m)
+		{
+			return Option.Return(m.Match(
+				Right: r => OptionResult.Just(r),
+				Left: _ => OptionResult.Nothing<R>()));
+		}
+
         /// <summary>
         /// Get the Left value
         /// NOTE: This throws an InvalidOperationException if the object is in the 
@@ -164,6 +175,13 @@ namespace Monad
                 throw new InvalidOperationException("Not in the Left state");
             return res.Left;
         }
+
+		public static Option<L> LeftOption<R, L>(this Either<L, R> m)
+		{
+			return Option.Return(m.Match(
+				Right: _ => OptionResult.Nothing<L>(),
+				Left: l => OptionResult.Just(l)));
+		}
 
         /// <summary>
         /// Pattern matching method for a branching expression
@@ -486,5 +504,13 @@ namespace Monad
             var res = self();
             return () => res;
         }
+
+		public static Either<R, L> Swap<R, L>(this Either<L, R> self)
+		{
+			return Either.Return(self.Match(
+				Right: l => new EitherPair<R, L>(l),
+				Left: r => new EitherPair<R, L>(r))
+			);
+		}
     }
 }

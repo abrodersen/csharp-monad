@@ -73,6 +73,11 @@ namespace Monad
                 });
         }
 
+		public static Option<T> Return<T>(Func<OptionResult<T>> del)
+		{
+			return new Option<T>(del);
+		}
+
     }
 
     /// <summary>
@@ -86,9 +91,7 @@ namespace Monad
         /// </summary>
         public static implicit operator OptionResult<T>(T value)
         {
-            return value == null
-                ? NothingResult<T>.Default
-                : new JustResult<T>(value);
+			return OptionResult.Just(value);
         }
 
         /// <summary>
@@ -119,6 +122,21 @@ namespace Monad
         public abstract OptionResult<T> Mappend(OptionResult<T> rhs);
     }
 
+	public static class OptionResult
+	{
+		public static OptionResult<T> Just<T>(T value)
+		{
+			return value == null
+				? NothingResult<T>.Default
+				: new JustResult<T>(value);
+		}
+
+		public static OptionResult<T> Nothing<T>()
+		{
+			return NothingResult<T>.Default;
+		}
+	}
+
     /// <summary>
     /// Option<T> monad extension methods
     /// </summary>
@@ -135,6 +153,14 @@ namespace Monad
                     ? NothingResult<T>.Default
                     : new JustResult<T>(self);
         }
+
+		public static OptionResult<T> ToOption<T>(this T? self)
+			where T : struct
+		{
+			return !self.HasValue
+				? NothingResult<T>.Default
+				: new JustResult<T>(self.Value);
+		}
 
         /// <summary>
         /// Select
@@ -354,5 +380,6 @@ namespace Monad
             var res = self();
             return () => res;
         }
+		
     }
 }
