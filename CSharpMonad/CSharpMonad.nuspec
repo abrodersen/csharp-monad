@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>csharp-monad</id>
-        <version>0.0.1</version>
-        <title>C# Monad Library</title>
+        <id>csharp-monad-fork</id>
+        <version>0.0.3</version>
+        <title>Fork of louthy's C# Monad Library</title>
         <authors>paul</authors>
-        <licenseUrl>https://github.com/louthy/csharp-monad/blob/master/LICENSE.md</licenseUrl>
-        <projectUrl>https://github.com/louthy/csharp-monad</projectUrl>
-        <iconUrl>http://www.4four.org/images/csharp-monad-logo.png</iconUrl>
+        <licenseUrl>https://github.com/abrodersen/csharp-monad/blob/master/LICENSE.md</licenseUrl>
+        <projectUrl>https://github.com/abrodersen/csharp-monad</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A C# library of monads and a full set of parser combinators based on the Haskell Parsec library.
 
